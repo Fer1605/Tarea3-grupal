@@ -2,7 +2,17 @@ document.getElementById('formUniverso').addEventListener('submit', function (e) 
   e.preventDefault();
 
   const nombre = document.getElementById('nombre').value.trim();
+  // Validar que nombre solo contenga letras y espacios
+  if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(nombre)) {
+    alert('El nombre solo debe contener letras y espacios.');
+    return;
+  }
   const numeroMagico = parseInt(document.getElementById('numeroMagico').value);
+  // Validar que numeroMagico sea un entero positivo
+  if (!/^\d+$/.test(numeroMagicoValor)) {
+    alert('El número mágico debe ser un número entero positivo.');
+    return;
+  }
   const rasgo = document.getElementById('rasgo').value;
   const lugar = document.getElementById('lugar').value.trim();
   const tipoMundo = document.getElementById('tipoMundo').value;
