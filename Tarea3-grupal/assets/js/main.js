@@ -7,9 +7,10 @@ document.getElementById('formUniverso').addEventListener('submit', function (e) 
   const lugar = document.getElementById('lugar').value.trim();
   const tipoMundo = document.getElementById('tipoMundo').value;
   const transporte = document.getElementById('transporte').value;
+  const fechaRegistro = document.getElementById('fechaRegistro').value; // Nuevo campo
 
   const nombreAlternativo = generarNombreAlternativo(nombre, numeroMagico);
-  const historia = generarHistoria(nombreAlternativo, rasgo, lugar, tipoMundo, transporte);
+  const historia = generarHistoria(nombreAlternativo, rasgo, lugar, tipoMundo, transporte, fechaRegistro); // Pasar fecha
 
   renderizarTarjeta(nombreAlternativo, historia, tipoMundo);
   this.reset();
@@ -22,7 +23,7 @@ function generarNombreAlternativo(nombre, numero) {
   return `${prefijos[numero % prefijos.length]}${base}${sufijos[numero % sufijos.length]}`;
 }
 
-function generarHistoria(nombreAlt, rasgo, lugar, mundo, transporte) {
+function generarHistoria(nombreAlt, rasgo, lugar, mundo, transporte, fechaRegistro) {
   const rasgos = {
     'Magia': 'posee una conexión ancestral con fuerzas ocultas que fluyen a través de los portales cósmicos',
     'Rebeldía': 'se opone a todo lo establecido, rompiendo barreras entre realidades con una sonrisa desafiante',
@@ -30,21 +31,29 @@ function generarHistoria(nombreAlt, rasgo, lugar, mundo, transporte) {
     'Empatía': 'es capaz de comprender los corazones de criaturas que ni siquiera tienen forma física'
   };
 
+  const fechaNarrativa = fechaRegistro ? ` El registro interdimensional de esta travesía quedó sellado el ${formatearFecha(fechaRegistro)}, un día que resonará en la historia de los universos.` : '';
+
   const escenarios = {
     'Selva flotante': `En el corazón de la Selva Flotante, donde los árboles flotan en el aire y las raíces se enredan con las nubes, ${nombreAlt} ${rasgos[rasgo]}
-con una misión sagrada: encontrar el Lago de los Ecos Perdidos escondido en ${lugar}. Armado con un ${transporte}, su travesía incluye criaturas invisibles, puentes hechos de luz líquida y desafíos que alteran la memoria.`,
+con una misión sagrada: encontrar el Lago de los Ecos Perdidos escondido en ${lugar}. Armado con un ${transporte}, su travesía incluye criaturas invisibles, puentes hechos de luz líquida y desafíos que alteran la memoria.${fechaNarrativa}`,
 
     'Ciudad de cristal': `Entre torres transparentes que reflejan pensamientos y calles que cambian de forma con las emociones, ${nombreAlt} ${rasgos[rasgo]}.
-Su objetivo: llegar al Núcleo de la Lógica Viva, en el sector secreto de ${lugar}. Solo con la ayuda de su ${transporte} podrá navegar entre espejismos y realidades fracturadas.`,
+Su objetivo: llegar al Núcleo de la Lógica Viva, en el sector secreto de ${lugar}. Solo con la ayuda de su ${transporte} podrá navegar entre espejismos y realidades fracturadas.${fechaNarrativa}`,
 
     'Volcán parlante': `Cada erupción del Volcán Parlante no lanza lava, sino palabras antiguas y frases que alteran el destino. En ese caos, ${nombreAlt} ${rasgos[rasgo]}.
-Debe descifrar el Lenguaje de Fuego para abrir las puertas de ${lugar}, viajando con su fiel ${transporte} entre las grietas del tiempo.`,
+Debe descifrar el Lenguaje de Fuego para abrir las puertas de ${lugar}, viajando con su fiel ${transporte} entre las grietas del tiempo.${fechaNarrativa}`,
 
     'Cielo invertido': `En un universo donde el cielo es tierra y las montañas cuelgan hacia abajo, ${nombreAlt} ${rasgos[rasgo]}.
-El aire canta y el suelo flota. Su viaje hacia ${lugar} le obligará a superar laberintos suspendidos y tormentas que llueven hacia arriba, todo mientras guía su ${transporte} con intuición pura.`
+El aire canta y el suelo flota. Su viaje hacia ${lugar} le obligará a superar laberintos suspendidos y tormentas que llueven hacia arriba, todo mientras guía su ${transporte} con intuición pura.${fechaNarrativa}`
   };
 
   return escenarios[mundo];
+}
+
+function formatearFecha(fechaISO) {
+  const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+  const fecha = new Date(fechaISO);
+  return fecha.toLocaleDateString('es-ES', opciones);
 }
 
 function renderizarTarjeta(nombre, historia, tipoMundo) {
