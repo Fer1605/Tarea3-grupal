@@ -9,7 +9,7 @@ document.getElementById('formUniverso').addEventListener('submit', function (e) 
   }
   const numeroMagico = parseInt(document.getElementById('numeroMagico').value);
   // Validar que numeroMagico sea un entero positivo
-  if (!/^\d+$/.test(numeroMagicoValor)) {
+  if (!/^\d+$/.test(numeroMagico)) {
     alert('El número mágico debe ser un número entero positivo.');
     return;
   }
@@ -41,7 +41,7 @@ function generarHistoria(nombreAlt, rasgo, lugar, mundo, transporte, fechaRegist
     'Empatía': 'es capaz de comprender los corazones de criaturas que ni siquiera tienen forma física'
   };
 
-  const fechaNarrativa = fechaRegistro ? ` El registro interdimensional de esta travesía quedó sellado el ${formatearFecha(fechaRegistro)}, un día que resonará en la historia de los universos.` : '';
+  const fechaNarrativa = fechaRegistro ? ` La huella temporal de este periplo quedó grabada indeleblemente el ${formatearFecha(fechaRegistro)}, un punto de convergencia que los cartógrafos astrales consultan para futuras travesías.` : '';
 
   const escenarios = {
     'Selva flotante': `En el corazón de la Selva Flotante, donde los árboles flotan en el aire y las raíces se enredan con las nubes, ${nombreAlt} ${rasgos[rasgo]}
