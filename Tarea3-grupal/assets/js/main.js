@@ -67,6 +67,11 @@ function formatearFecha(fechaISO) {
 }
 
 function renderizarTarjeta(nombre, historia, tipoMundo) {
+  // Ocultar imagen del título
+  const tituloImagenElement = document.getElementById('tituloImagen');
+  if (tituloImagenElement) {
+    tituloImagenElement.style.display = 'none'; // Ocultar imagen del título
+  } 
   const contenedor = document.getElementById('resultado');
   contenedor.innerHTML = ''; // Borrar tarjetas anteriores
 
@@ -76,6 +81,14 @@ function renderizarTarjeta(nombre, historia, tipoMundo) {
     'Volcán parlante': './assets/img/volcan_parlante.jpg',
     'Cielo invertido': './assets/img/cielo_invertido.jpg'
   };
+// Establecer imagen de fondo de pantalla
+  const bodyElement= document.body;
+  const imagenFondoPantallaURL='./assets/img/What if.jpeg';
+  bodyElement.style.backgroundImage = `url('${imagenFondoPantallaURL}')`;
+  bodyElement.style.backgroundRepeat= 'no-repeat';
+  bodyElement.style.backgroundSize = 'cover';
+  bodyElement.style.backgroundPosition = 'center center';
+  bodyElement.style.backgroundAttachment = 'fixed';
 
   const tarjeta = document.createElement('div');
   tarjeta.className = 'col-md-8';
